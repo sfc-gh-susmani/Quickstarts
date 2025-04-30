@@ -63,8 +63,10 @@ CREATE OR REPLACE WAREHOUSE ds_wh
     INITIALLY_SUSPENDED = TRUE
 COMMENT = 'data science warehouse for tasty bytes';
 
+use role accountadmin;
+
 --Create Resource Monitors on Warehouse
-CREATE OR REPLACE RESOURCE MONITOR de_wh
+CREATE OR REPLACE RESOURCE MONITOR de_rm
 WITH
     CREDIT_QUOTA = 100 -- set the quota to 100 credits
     FREQUENCY = monthly -- reset the monitor monthly
@@ -74,7 +76,7 @@ WITH
         ON 100 PERCENT DO SUSPEND -- suspend warehouse at 100 percent, let queries finish
         ON 110 PERCENT DO SUSPEND_IMMEDIATE; -- suspend warehouse and cancel all queries at 110 percent
 
-CREATE OR REPLACE RESOURCE MONITOR dev_wh
+CREATE OR REPLACE RESOURCE MONITOR dev_rm
 WITH
     CREDIT_QUOTA = 50 -- set the quota to 100 credits
     FREQUENCY = monthly -- reset the monitor monthly
@@ -84,7 +86,7 @@ WITH
         ON 100 PERCENT DO SUSPEND -- suspend warehouse at 100 percent, let queries finish
         ON 110 PERCENT DO SUSPEND_IMMEDIATE; -- suspend warehouse and cancel all queries at 110 percent
 
-CREATE OR REPLACE RESOURCE MONITOR ds_wh
+CREATE OR REPLACE RESOURCE MONITOR ds_rm
 WITH
     CREDIT_QUOTA = 100 -- set the quota to 100 credits
     FREQUENCY = monthly -- reset the monitor monthly
