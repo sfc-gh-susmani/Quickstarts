@@ -9,7 +9,7 @@ USE ROLE securityadmin;
 GRANT USAGE ON DATABASE AeroFleet TO ROLE accountadmin;
 GRANT USAGE ON DATABASE AeroFleet TO ROLE data_engineer;
 GRANT USAGE ON DATABASE AeroFleet TO ROLE developer;
-GRANT USAGE ON DATABASE AeroFleet TO ROLE sc;
+GRANT USAGE ON DATABASE AeroFleet TO ROLE data_scientist;
 
 GRANT USAGE ON ALL SCHEMAS IN DATABASE AeroFleet TO ROLE accountadmin;
 GRANT USAGE ON ALL SCHEMAS IN DATABASE AeroFleet TO ROLE data_engineer;
@@ -57,27 +57,13 @@ GRANT ALL ON FUTURE TABLES IN SCHEMA AeroFleet.raw_customer TO ROLE developer;
 GRANT ALL ON FUTURE TABLES IN SCHEMA AeroFleet.raw_customer TO ROLE data_scientist;
 
 
-GRANT ALL ON FUTURE VIEWS IN SCHEMA AeroFleet.harmonized TO ROLE admin;
+GRANT ALL ON FUTURE VIEWS IN SCHEMA AeroFleet.harmonized TO ROLE accountadmin;
 GRANT ALL ON FUTURE VIEWS IN SCHEMA AeroFleet.harmonized TO ROLE data_engineer;
 GRANT ALL ON FUTURE VIEWS IN SCHEMA AeroFleet.harmonized TO ROLE developer;
 GRANT ALL ON FUTURE VIEWS IN SCHEMA AeroFleet.harmonized TO ROLE data_scientist;
 
 
-GRANT ALL ON FUTURE VIEWS IN SCHEMA AeroFleet.analytics TO ROLE admin;
+GRANT ALL ON FUTURE VIEWS IN SCHEMA AeroFleet.analytics TO ROLE accountadmin;
 GRANT ALL ON FUTURE VIEWS IN SCHEMA AeroFleet.analytics TO ROLE data_engineer;
 GRANT ALL ON FUTURE VIEWS IN SCHEMA AeroFleet.analytics TO ROLE developer;
 GRANT ALL ON FUTURE VIEWS IN SCHEMA AeroFleet.analytics TO ROLE data_scientist;
-
-
--- Apply Masking Policy Grants
-USE ROLE accountadmin;
-GRANT CREATE MASKING POLICY ON ACCOUNT TO ROLE admin;
-GRANT APPLY MASKING POLICY ON ACCOUNT TO ROLE admin;
-GRANT APPLY MASKING POLICY ON ACCOUNT TO ROLE data_engineer;
-
---Apply Row Level Policy Grants
-USE ROLE accountadmin;
-GRANT CREATE ROW ACCESS POLICY ON ACCOUNT TO ROLE admin;
-GRANT APPLY ROW ACCESS POLICY ON ACCOUNT TO ROLE admin;
-GRANT APPLY ROW ACCESS POLICY ON ACCOUNT TO ROLE data_engineer;
-  
