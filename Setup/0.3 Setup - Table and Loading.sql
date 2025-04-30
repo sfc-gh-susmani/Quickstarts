@@ -6,7 +6,7 @@ USE WAREHOUSE de_wh;
  • file format and stage creation
 --*/
 
-CREATE OR REPLACE FILE FORMAT 101.public.csv_ff 
+CREATE OR REPLACE FILE FORMAT AeroFleet.public.csv_ff 
 type = 'csv';
 
 CREATE OR REPLACE STAGE AeroFleet.public.s3load
