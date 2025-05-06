@@ -39,7 +39,7 @@ JOIN AEROFLEET.raw_pos.order_header oh
 -- 3. Enriching the Data – Gold Layer
 -- =========================================
 -- Bringing in additional dimensional data without manual pipeline management.
-CREATE OR REPLACE DYNAMIC TABLE AEROFLEET.HARMONIZED.ORDERS_ENRICHED_DT_(put your name here)
+CREATE OR REPLACE DYNAMIC TABLE AEROFLEET.HARMONIZED.ORDERS_ENRICHED_DT_<name>
 TARGET_LAG = '10 minutes'
 WAREHOUSE = 'DE_WH'
 AS 
@@ -62,7 +62,7 @@ SELECT
     cl.children_count,
     cl.gender,
     cl.marital_status
-FROM AEROFLEET.HARMONIZED.ORDERS_DT_(put your name here) s
+FROM AEROFLEET.HARMONIZED.ORDERS_DT_<name> s
 JOIN AEROFLEET.raw_pos.truck t 
     ON s.truck_id = t.truck_id
 JOIN AEROFLEET.raw_pos.menu m 
@@ -79,5 +79,5 @@ ALTER WAREHOUSE de_wh SUSPEND;
 -- =========================================
 -- Instantly create a copy of a table without consuming extra storage.
 
-CREATE OR REPLACE DYNAMIC TABLE AEROFLEET.RAW_CUSTOMER.CUSTOMER_LOYALTY_DEV_(put your name here)
+CREATE OR REPLACE DYNAMIC TABLE AEROFLEET.RAW_CUSTOMER.CUSTOMER_LOYALTY_DEV_<name>
 CLONE AEROFLEET.HARMONIZED.ORDERS_ENRICHED_DT_$uid;
