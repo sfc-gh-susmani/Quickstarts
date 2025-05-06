@@ -72,6 +72,8 @@ JOIN AEROFLEET.raw_pos.franchise f
 LEFT JOIN AEROFLEET.raw_customer.customer_loyalty cl
     ON s.customer_id = cl.customer_id;
 
+ALTER WAREHOUSE de_wh SUSPEND;
+
 -- =========================================
 -- 4. Zero-Copy Cloning
 -- =========================================
