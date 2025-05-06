@@ -68,7 +68,7 @@ grant usage on procedure change_maxedWH(varchar, varchar) to role data_engineer;
 use role data_engineer;
 -- try to modify the warehouse traditional way; not allowed
 
---This is what they need to call. 
-call procs.procs.change_maxedWH('MAXEDWH', 'MEDIUM');
+--This is what they need to call. First parameter is name of warehouse 
+call procs.procs.change_maxedWH('de_wh', 'MEDIUM');
 
 
