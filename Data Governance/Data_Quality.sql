@@ -7,17 +7,12 @@ Lastly, we will monitor the event table for any data quality issues.
 ----------------------------------------------------------------------------------*/
 
 -- Set context
-use role accountadmin;
+use role data_governance;
 use database aerofleet;
 use schema raw_customer;
-use warehouse compute;
-
--- Grants to object owner to be able to execute the DMFs on the account
-grant EXECUTE DATA METRIC FUNCTION on account to role sysadmin;
+use warehouse dg_wh;
 
 
--- Change role to sysadmin
-use role sysadmin;
 
 
 -- Let's look at statistics on table using Snowsight UI

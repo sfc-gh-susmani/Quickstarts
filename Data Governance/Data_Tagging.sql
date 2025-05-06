@@ -7,10 +7,10 @@ explore where tags have been applied using the built-in Governance dashboard.
 ----------------------------------------------------------------------------------*/
 
 -- Set context
-use role sysadmin;
+use role data_governance;
 use database aerofleet;
 use schema raw_customer;
-use warehouse compute;
+use warehouse dg_wh;
 
 -- Create tags
 create or replace tag cost_center
