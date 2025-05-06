@@ -36,3 +36,13 @@ select system$get_tag_allowed_values('aerofleet.raw_customer.cost_center');
 --     last_name set tag visibility = 'PRIVATE',
 --     e_mail set tag visibility = 'PRIVATE',
 --     phone_number set tag visibility = 'PRIVATE';
+
+-- Create data masking policy
+create masking policy customer_pii_mask as (val string) returns string ->
+  case
+    when is_role_in_session('DATA_ENGINEER') then val
+    else '******'
+  end;
+
+-- apply to tag
+alter tag visibility set masking policy customer_pii_mask;
