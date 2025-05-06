@@ -6,11 +6,12 @@
 -- Using the appropriate role and warehouse for this demo.
 USE ROLE data_engineer;
 USE WAREHOUSE de_wh;
-SET uid = current_user();
+
 -- =========================================
 -- 2. Creating the Silver Layer with Dynamic Tables
 -- =========================================
 -- Dynamic Tables allow for continuous transformation without complex scheduling.
+alter warehouse de_wh set warehouse_size = 'XLarge';
 CREATE OR REPLACE DYNAMIC TABLE AEROFLEET.HARMONIZED.ORDERS_DT_<name>
 TARGET_LAG = 'DOWNSTREAM'
 WAREHOUSE = 'DE_WH'
@@ -72,7 +73,9 @@ JOIN AEROFLEET.raw_pos.franchise f
 LEFT JOIN AEROFLEET.raw_customer.customer_loyalty cl
     ON s.customer_id = cl.customer_id;
 
+alter warehouse de_wh set warehouse_size = 'XSmall';
 ALTER WAREHOUSE de_wh SUSPEND;
+ALTER DYNAMIC TABLE AEROFLEET.HARMONIZED.ORDERS_DT_<name> SUSPEND;
 
 -- =========================================
 -- 4. Zero-Copy Cloning
